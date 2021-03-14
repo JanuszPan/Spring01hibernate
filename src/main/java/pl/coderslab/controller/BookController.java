@@ -8,6 +8,7 @@ import pl.coderslab.dao.BookDao;
 import pl.coderslab.entity.Book;
 
 @Controller
+@RequestMapping(produces = "application/json; charset=UTF-8")
 public class BookController {
     private final BookDao bookDao;
 

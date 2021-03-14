@@ -8,10 +8,12 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Publisher;
 
 @Controller
+@RequestMapping(produces = "application/json; charset=UTF-8")
 public class PublisherController {
     private final PublisherDao publisherDao;
 
     public PublisherController(PublisherDao publisherDao) {
+
         this.publisherDao = publisherDao;
     }
 
@@ -44,6 +46,4 @@ public class PublisherController {
         publisherDao.deletePublisher(publisher);
         return "Publisher deleted";
     }
-
-
 }

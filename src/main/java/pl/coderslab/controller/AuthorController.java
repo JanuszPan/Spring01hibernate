@@ -8,6 +8,7 @@ import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
 
 @Controller
+@RequestMapping(produces = "application/json; charset=UTF-8")
 public class AuthorController {
     private final AuthorDao authorDao;
 
