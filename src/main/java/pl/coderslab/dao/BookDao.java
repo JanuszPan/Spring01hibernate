@@ -6,13 +6,23 @@ import pl.coderslab.entity.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
 public class BookDao {
     @PersistenceContext
     EntityManager entityManager;
-
+    public List<Book> findAll(){
+        Query query = entityManager.createQuery("select b from  Book b");
+        return query.getResultList();
+    }
+    public List<Book> getRatingList(int rating) {
+        Query ratingListQuery = entityManager.createQuery("select b from Book b where b.rating = :rating");
+        ratingListQuery.setParameter("rating", rating);
+        return ratingListQuery.getResultList();
+    }
     public void saveBook(Book book) {
         entityManager.persist(book);
     }

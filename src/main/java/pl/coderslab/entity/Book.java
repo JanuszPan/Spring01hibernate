@@ -2,6 +2,8 @@ package pl.coderslab.entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -12,6 +14,21 @@ public class Book {
     private String title;
     private int rating;
     private String description;
+
+    //    @ManyToOne(cascade = CascadeType.PERSIST)// PERSIST powoduje,że za każdym razem doda publishera
+    @ManyToOne
+    private Publisher publisher;
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
 
     public String getTitle() {
         return title;
@@ -36,7 +53,6 @@ public class Book {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public Long getId() {
         return id;

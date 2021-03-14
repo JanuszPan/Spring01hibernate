@@ -1,0 +1,6 @@
+GET http://localhost:8080/book/add
+###
+POST http://localhost:8080/book/1/nowa
+###
+GET http://localhost:8080/book/get/1
+###

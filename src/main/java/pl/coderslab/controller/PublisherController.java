@@ -26,9 +26,9 @@ public class PublisherController {
         return "Id nowego wydawcy to: " + publisher.getId() + " Nazwa nowego wydawcy to: " + publisher.getName();
     }
 
-    @RequestMapping("/publisher")
+    @RequestMapping("/publisher/{id}/{name}")
     @ResponseBody
-    public String updatePublisher(@PathVariable long id, String name) {
+    public String updatePublisher(@PathVariable long id, @PathVariable String name) {
         Publisher publisher = publisherDao.findPublisherById(id);
         return publisher.toString();
     }
