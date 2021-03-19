@@ -23,7 +23,7 @@ public class BookController {
     private final AuthorDao authorDao;
 //    private static final System.Logger logger = (System.Logger) LoggerFactory.getLogger(BookController.class);
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {// wstrzykujemy Dao
 
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
@@ -40,14 +40,6 @@ public class BookController {
         book.setRating(3);
         book.setDescription("Description1");
 
-//        book.setTitle("Tytuł2");
-//        book.setRating(4);
-//        book.setDescription("Description2");
-//
-//        book.setTitle("Tytuł3");
-//        book.setRating(5);
-//        book.setDescription("Description3");
-
 //zadanie1
         Publisher publisher = new Publisher();
         publisher.setName("publisher1");
@@ -61,7 +53,8 @@ public class BookController {
         authors.add(author2);
         book.setAuthors(authors);
 
-        bookDao.saveBook(book);
+        bookDao.saveBook(book);//wywołanie metody utworzonej w klasie BookDao
+        // do obiektu pobieramy nadany podczas zapisu identyfikator id
         return "Id nowej ksiażki: " + book.getId() + " Tytuł nowej książki to: " + book.getTitle() + " rating nowej książki to: "+book.getRating()+ " Opis nowej książki to: "+book.getDescription();
     }
 

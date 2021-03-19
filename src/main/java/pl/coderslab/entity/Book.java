@@ -10,10 +10,10 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    private int rating;
-    private String description;
+    private Long id;//bigint auto_increment primary key
+    private String title;//  varchar(255) null
+    private int rating;//int not null
+    private String description;// varchar(255) null
 
     //    @ManyToOne(cascade = CascadeType.PERSIST)// PERSIST powoduje,że za każdym razem doda publishera
     @ManyToOne

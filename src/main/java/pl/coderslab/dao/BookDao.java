@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional
 public class BookDao {
     @PersistenceContext
-    EntityManager entityManager;
+    EntityManager entityManager;//zarządca encji
     public List<Book> findAll(){
         Query query = entityManager.createQuery("select b from  Book b");
         return query.getResultList();
@@ -24,7 +24,7 @@ public class BookDao {
         return ratingListQuery.getResultList();
     }
     public void saveBook(Book book) {
-        entityManager.persist(book);
+        entityManager.persist(book);//zapisuje encje do bazy danych (jako parametr przyjmuje obiekt do zapisu)
     }
     public void update(Book book) {
 
