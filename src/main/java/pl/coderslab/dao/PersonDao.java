@@ -1,30 +1,32 @@
 package pl.coderslab.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Person;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 @Repository
 @Transactional
 public class PersonDao {
+
+    @PersistenceContext
     EntityManager entityManager;
-    public void savePerson(Person person) {
+
+    public void create(Person person){
         entityManager.persist(person);
     }
-    public void updatePerson(Person person) {
 
+    public void update(Person person){
         entityManager.merge(person);
     }
-    public Person findPersonById(long id) {
 
+    public Person read(long id){
         return entityManager.find(Person.class, id);
     }
 
-    public void deletePerson(Person person) {
-        entityManager.remove(entityManager.contains(person) ? person: entityManager.merge(person));
+    public void delete(Person person){
+        entityManager.remove(entityManager.contains(person) ? person : entityManager.merge(person));
     }
-
 }

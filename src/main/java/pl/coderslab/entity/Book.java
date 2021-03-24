@@ -1,6 +1,5 @@
 package pl.coderslab.entity;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ public class Book {
     private Publisher publisher;
 
     public void setPublisher(Publisher publisher) {
+
         this.publisher = publisher;
     }
 
@@ -27,6 +27,7 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
 
     public void setAuthors(List<Author> authors) {
+
         this.authors = authors;
     }
 
@@ -35,14 +36,17 @@ public class Book {
     }
 
     public void setTitle(String title) {
+
         this.title = title;
     }
 
     public int getRating() {
+
         return rating;
     }
 
     public void setRating(int rating) {
+
         this.rating = rating;
     }
 
@@ -51,15 +55,17 @@ public class Book {
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public Long getId() {
+
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id){
+    this.id = id;
     }
 
 

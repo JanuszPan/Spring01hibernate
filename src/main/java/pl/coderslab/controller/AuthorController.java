@@ -6,43 +6,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
+import pl.coderslab.entity.Book;
+
+import java.util.List;
 
 @Controller
-@RequestMapping(produces = "application/json; charset=UTF-8")
+@RequestMapping(value = "/authors", produces = "text/html;charset=utf-8")
 public class AuthorController {
-    private final AuthorDao authorDao;
+
+    private AuthorDao authorDao;
 
     public AuthorController(AuthorDao authorDao) {
         this.authorDao = authorDao;
     }
 
-    @RequestMapping("/author/add")
+    @RequestMapping(value = "/add/{firstName}/{lastName}")
     @ResponseBody
-    public String newAuthor() {
+    public String saveAuthor(@PathVariable String firstName, @PathVariable String lastName) {
         Author author = new Author();
-        author.setFirstName("Name1");
-        author.setLastName("Surnname1");
-        authorDao.createAuthor(author);
-        return "Id nowego autora to: " + author.getId() + " Imię i nazwisko nowego autora to: " + author.getFirstName() + " " + author.getLastName();
-    }
-    @RequestMapping("/author/get/{id}")
-    @ResponseBody
-    public String getAuthor(@PathVariable long id){
-        Author author = authorDao.findAuthorById(id);
-        return author.toString();
-    }
-    @RequestMapping("/author/{id}/{firstName}/{lastName}")
-    public String updateAuthor(@PathVariable long id, @PathVariable String firstName, @PathVariable String lastName ){
-        Author author= authorDao.findAuthorById(id);
         author.setFirstName(firstName);
         author.setLastName(lastName);
-        authorDao.updateAuthor(author);
+        authorDao.create(author);
+        return "Utworzono " + author.toString();
+    }
+
+    @RequestMapping(value = "/update/{id:\\d+}/{firstName}/{lastName}")
+    @ResponseBody
+    public String editAuthor(@PathVariable long id, @PathVariable String firstName, @PathVariable String lastName) {
+        Author author = authorDao.read(id);
+        author.setFirstName(firstName);
+        author.setLastName(lastName);
+        authorDao.update(author);
         return author.toString();
     }
-    @RequestMapping("/author/delete/{id}")
-    public String deleteAuthor(@PathVariable long id){
-        Author author = authorDao.findAuthorById(id);
-        authorDao.deleteAuthor(author);
-        return " Author deleted";
+
+    @RequestMapping(value = "/read/{id:\\d+}")
+    @ResponseBody
+    public String findAuthor(@PathVariable long id) {
+        return authorDao.read(id).toString();
+    }
+
+    @RequestMapping(value = "/delete/{id:\\d+}")
+    @ResponseBody
+    public String deleteAuthor(@PathVariable long id) {
+        Author author = authorDao.read(id);
+        authorDao.delete(author);
+        return "deleted";
+    }
+
+    @RequestMapping("/all")
+    @ResponseBody
+    public String findAllAuthors() {
+        List<Author> authorList = authorDao.findAll();
+        return authorList.toString();
     }
 }

@@ -22,28 +22,28 @@ public class PublisherController {
     public String newPublisher() {
         Publisher publisher = new Publisher();
         publisher.setName("Publisher1");
-        publisherDao.createPublisher(publisher);
+        publisherDao.create(publisher);
         return "Id nowego wydawcy to: " + publisher.getId() + " Nazwa nowego wydawcy to: " + publisher.getName();
     }
 
     @RequestMapping("/publisher/{id}/{name}")
     @ResponseBody
     public String updatePublisher(@PathVariable long id, @PathVariable String name) {
-        Publisher publisher = publisherDao.findPublisherById(id);
+        Publisher publisher = publisherDao.read(id);
         return publisher.toString();
     }
 
     @RequestMapping("/publisher/get/{id}")
     @ResponseBody
     public String getPublisher(@PathVariable long id) {
-        Publisher publisher = publisherDao.findPublisherById(id);
+        Publisher publisher = publisherDao.read(id);
         return publisher.toString();
     }
     @RequestMapping("/publisher/delete/{id}")
     @ResponseBody
     public String deletePublisher(@PathVariable long id){
-        Publisher publisher = publisherDao.findPublisherById(id);
-        publisherDao.deletePublisher(publisher);
+        Publisher publisher = publisherDao.read(id);
+        publisherDao.delete(publisher);
         return "Publisher deleted";
     }
 }

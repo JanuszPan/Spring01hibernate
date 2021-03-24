@@ -26,21 +26,21 @@ public class PersonController {
     @RequestMapping("/person/get/{id}")
     @ResponseBody
     public String getPerson(@PathVariable long id){
-        Person person = personDao.findPersonById(id);
+        Person person = personDao.read(id);
         return person.toString();
     }
     @RequestMapping("/person/{id}")
     public String updatePerson(@PathVariable long id){
-        Person person= personDao.findPersonById(id);
+        Person person= personDao.read(id);
         person.setLogin("login1");
         person.setEmail("email1");
-        personDao.updatePerson(person);
+        personDao.update(person);
         return person.toString();
     }
     @RequestMapping("/person/delete/{id}")
     public String deletePerson(@PathVariable long id){
-        Person author = personDao.findPersonById(id);
-        personDao.deletePerson(person);
+        Person author = personDao.read(id);
+        personDao.delete(person);
 
         return "Person deleted";
     }

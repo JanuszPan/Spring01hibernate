@@ -5,13 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="publishers")
 public class Publisher {
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +25,13 @@ public class Publisher {
 
     public void setName(String name) {
         this.name = name;
+    }
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
 //Utwórz encje o nazwie Publisher.
